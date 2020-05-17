@@ -14,6 +14,7 @@ public class TopBase {
     private By searchButton = By.cssSelector("button[name=submit_search]");
     private By signInButton = By.className("login");
     private By signOutButton = By.cssSelector("nav a.logout");
+    private By accountButton = By.className("account");
 
     public TopBase(WebDriver driver) {
         this.driver = driver;
@@ -53,6 +54,16 @@ public class TopBase {
         return false;
     }
 
+    protected boolean isDisappeared(By by) {
+        WebDriverWait wait = new WebDriverWait(driver, 3);
+        try {
+            wait.until(ExpectedConditions.invisibilityOfElementLocated(by));
+        } catch (TimeoutException e) {
+            return false;
+        }
+        return true;
+    }
+
     public boolean isSignedIn() {
         return isPresent(signOutButton);
     }
@@ -67,4 +78,9 @@ public class TopBase {
         wait.until(ExpectedConditions.presenceOfElementLocated(by));
     }
 
+    public AccountPage goToMyAccount() {
+        waitFor(accountButton);
+        driver.findElement(accountButton);
+        return new AccountPage(driver);
+    }
 }
