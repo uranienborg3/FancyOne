@@ -1,11 +1,9 @@
 package pages;
 
 import org.openqa.selenium.*;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.concurrent.TimeUnit;
 
 public class ProductPage extends TopBase {
 
@@ -40,5 +38,13 @@ public class ProductPage extends TopBase {
             return true;
         }
         return false;
+    }
+
+    public void clickNextBigPic(int times) {
+        WebDriverWait wait = new WebDriverWait(driver, 3);
+        for (int i = 0; i < times; i++) {
+            wait.until(ExpectedConditions.presenceOfElementLocated(bigPicOpened));
+            driver.findElement(nextBigpic).click();
+        }
     }
 }
