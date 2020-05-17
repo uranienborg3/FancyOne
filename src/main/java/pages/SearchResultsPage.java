@@ -19,17 +19,13 @@ public class SearchResultsPage extends TopBase {
         super(driver);
     }
 
-    private List<WebElement> getSearchResults() {
-        return driver.findElements(productBox);
-    }
-
     public int getNumberOfSearchResults() {
         return getSearchResults().size();
     }
 
     /**
      * @param index 1-based
-     * @return a string that is a price
+     * @return returns a string that is the price
      * displayed on a product
      */
     public String getPriceOf(int index) {
@@ -42,5 +38,9 @@ public class SearchResultsPage extends TopBase {
     public void sortSearchResults(String sortByText) {
         Select dropdown = new Select(driver.findElement(dropDown));
         dropdown.selectByVisibleText(sortByText);
+    }
+
+    private List<WebElement> getSearchResults() {
+        return driver.findElements(productBox);
     }
 }

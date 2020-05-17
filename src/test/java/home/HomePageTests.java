@@ -35,4 +35,11 @@ public class HomePageTests extends BaseTests {
         assertEquals(modal.getSuccessHeader(), "Product successfully added to your shopping cart",
                 "Product not added to cart");
     }
+
+    @Test
+    public void testGoToLogIn() {
+        var login = topbase.clickSignIn();
+        assertTrue(login.createAccountPresent(), "No create account form: probably not a login page");
+        assertTrue(login.logInPresent(), "No login form: probably not a login page");
+    }
 }

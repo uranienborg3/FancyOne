@@ -33,6 +33,9 @@ public class HomePage extends TopBase {
         return new ProductPage(driver);
     }
 
+    /**
+     * @param index 1-based
+     */
     public QuickViewFrame quickViewProduct(int index) {
         WebElement product = getProductElement(index);
         showButtons(product);
@@ -42,6 +45,9 @@ public class HomePage extends TopBase {
         return new QuickViewFrame(driver);
     }
 
+    /**
+     * @param index 1-based
+     */
     public CartModal addProductToCart(int index) {
         WebElement product = getProductElement(index);
         showButtons(product);
@@ -54,6 +60,9 @@ public class HomePage extends TopBase {
         action.moveToElement(product).perform();
     }
 
+    /**
+     * @param index 1-based
+     */
     private WebElement getProductElement(int index) {
         WebDriverWait wait = new WebDriverWait(driver, 5);
         wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(productBox));
