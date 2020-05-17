@@ -2,14 +2,14 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
 
 public class AuthenticationPage extends TopBase {
 
     private By createAccountForm = By.id("create-account_form");
     private By logInFrom = By.id("login_form");
+    private By emailField = By.id("email");
+    private By passwordField = By.id("passwd");
+    private By submitLoginButton = By.id("SubmitLogin");
 
     public AuthenticationPage(WebDriver driver) {
         super(driver);
@@ -25,8 +25,14 @@ public class AuthenticationPage extends TopBase {
         return isPresent(logInFrom);
     }
 
-    private void waitFor(By by) {
-        WebDriverWait wait = new WebDriverWait(driver, 3);
-        wait.until(ExpectedConditions.presenceOfElementLocated(by));
+    private void typeInto(By element, String text) {
+        waitFor(element);
+        driver.findElement(element).sendKeys(text);
+    }
+
+    public void logIn(String email, String password) {
+        typeInto(emailField, email);
+        typeInto(passwordField, password);
+        driver.findElement(submitLoginButton).click();
     }
 }
