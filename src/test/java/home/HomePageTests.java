@@ -42,4 +42,14 @@ public class HomePageTests extends BaseTests {
         assertTrue(login.createAccountPresent(), "No create account form: probably not a login page");
         assertTrue(login.logInPresent(), "No login form: probably not a login page");
     }
+
+    @Test
+    public void testChangeToBestSellersTab() {
+        var home = topbase.switchToHomePage();
+        var productsBeforeChanging = home.getProductList();
+        home.changeToBestSellersTab();
+        var productsAfterChanging = home.getProductList();
+        assertNotEquals(productsBeforeChanging, productsAfterChanging,
+                "Lists are the same: probably tabs did not change");
+    }
 }

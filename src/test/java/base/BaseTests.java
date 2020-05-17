@@ -7,8 +7,6 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import pages.TopBase;
 
-import java.util.concurrent.TimeUnit;
-
 public class BaseTests {
 
     private WebDriver driver;
@@ -25,7 +23,6 @@ public class BaseTests {
     @BeforeMethod
     public void goHome() {
         driver.get("http://automationpractice.com/index.php");
-//        driver.manage().timeouts().setScriptTimeout(5, TimeUnit.SECONDS);
         topbase = new TopBase(driver);
     }
 

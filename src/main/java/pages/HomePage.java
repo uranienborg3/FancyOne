@@ -11,11 +11,12 @@ import java.util.List;
 
 public class HomePage extends TopBase {
 
-    private By productBox = By.cssSelector("#homefeatured li");
+    private By productBox = By.cssSelector("ul.active li");
     private By moreButton = By.cssSelector("a.button.lnk_view");
     private By addToCartButton = By.cssSelector("a.ajax_add_to_cart_button");
     private By quickViewButton = By.className("quick-view");
     private By iFrame = By.className("fancybox-iframe");
+    private By bestSellersTab = By.className("blockbestsellers");
 
 
     public HomePage(WebDriver driver) {
@@ -64,9 +65,17 @@ public class HomePage extends TopBase {
      * @param index 1-based
      */
     private WebElement getProductElement(int index) {
-        WebDriverWait wait = new WebDriverWait(driver, 5);
-        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(productBox));
-        List<WebElement> allProductsList = driver.findElements(productBox);
-        return allProductsList.get(index - 1);
+//        WebDriverWait wait = new WebDriverWait(driver, 5);
+//        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(productBox));
+//        List<WebElement> allProductsList = driver.findElements(productBox);
+        return getProductList().get(index - 1);
+    }
+
+    public List<WebElement> getProductList() {
+        return driver.findElements(productBox);
+    }
+
+    public void changeToBestSellersTab() {
+        driver.findElement(bestSellersTab).click();
     }
 }
