@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 
 public class QuickViewFrame {
 
+    // TODO: fields, that will not change, must be final.
     private WebDriver driver;
     private By bigPic = By.id("bigpic");
 

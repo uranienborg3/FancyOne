@@ -8,6 +8,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class ProductPage extends TopBase {
 
+    // TODO: fields, that will not change, must be final.
+    // TODO: rename variable (https://docs.oracle.com/javase/tutorial/java/nutsandbolts/variables.html)
     private By bigpic = By.id("bigpic");
     private By bigPicEnlarged = By.cssSelector("div.fancybox-opened");
     private By nextPicLink = By.cssSelector("div.fancybox-opened a.fancybox-next");
