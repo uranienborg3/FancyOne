@@ -4,8 +4,10 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+//TODO: super class must be abstract
 public class TopBase {
 
+    // TODO: fields, that will not change, must be final.
     protected WebDriver driver;
     private By searchField = By.id("search_query_top");
     private By searchButton = By.cssSelector("button[name=submit_search]");
@@ -32,6 +34,7 @@ public class TopBase {
         return new AuthenticationPage(driver);
     }
 
+    //TODO: nice naming =)
     protected boolean isPresent(By by) {
         WebDriverWait wait = new WebDriverWait(driver, 3);
         try {
@@ -42,6 +45,7 @@ public class TopBase {
         return true;
     }
 
+    // TODO: rename argument.
     protected boolean isNotPresent(By by) {
         try {
             driver.findElement(by);
@@ -51,7 +55,9 @@ public class TopBase {
         return false;
     }
 
+    // TODO: rename argument.
     protected boolean isDisappeared(By by) {
+        //TODO: please, avoid "magic numbers". Use constants.
         WebDriverWait wait = new WebDriverWait(driver, 3);
         try {
             wait.until(ExpectedConditions.invisibilityOfElementLocated(by));
@@ -62,6 +68,7 @@ public class TopBase {
     }
 
     protected boolean isDisappeared(WebElement element) {
+        //TODO: please, avoid "magic numbers". Use constants.
         WebDriverWait wait = new WebDriverWait(driver, 3);
         try {
             wait.until(ExpectedConditions.invisibilityOf(element));
@@ -84,7 +91,9 @@ public class TopBase {
         driver.findElement(signOutButton).click();
     }
 
+    // TODO: rename argument.
     protected void waitFor(By by) {
+        //TODO: please, avoid "magic numbers". Use constants.
         WebDriverWait wait = new WebDriverWait(driver, 3);
         wait.until(ExpectedConditions.presenceOfElementLocated(by));
     }

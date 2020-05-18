@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 
 public class AuthenticationPage extends TopBase {
 
+    // TODO: fields, that will not change, must be final.
     private By createAccountForm = By.id("create-account_form");
     private By logInFrom = By.id("login_form");
     private By emailField = By.id("email");

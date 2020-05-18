@@ -9,6 +9,7 @@ import java.util.List;
 
 public class SearchResultsPage extends TopBase {
 
+    // TODO: fields, that will not change, must be final.
     private By productBox = By.cssSelector("ul.product_list > li");
     private By dropDown = By.id("selectProductSort");
     private By priceText = By.cssSelector("div.right-block .content_price span.price");
@@ -28,6 +29,7 @@ public class SearchResultsPage extends TopBase {
      */
     public String getPriceOf(int index) {
         WebElement product = getSearchResults().get(index - 1);
+        //TODO: please, avoid redundant code.
 //        WebDriverWait wait = new WebDriverWait(driver, 5);
 //        wait.until(ExpectedConditions.visibilityOfElementLocated(priceText));
         return product.findElement(priceText).getText();

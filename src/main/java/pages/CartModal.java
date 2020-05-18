@@ -7,9 +7,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class CartModal {
 
+    // TODO: fields, that will not change, must be final.
     private WebDriver driver;
     private By header = By.cssSelector("#layer_cart div.layer_cart_product h2");
-
 
     public CartModal(WebDriver driver) {
         this.driver = driver;
