@@ -26,5 +26,6 @@ public class AccountTests extends BaseTests {
         var wishlist = account.goWishLists();
         wishlist.deleteWishlist("test");
         assertTrue(wishlist.wishListDisappeared("test"), "Wishlist not deleted");
+        topbase.signOut();
     }
 }

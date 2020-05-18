@@ -1,9 +1,6 @@
 package pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -36,8 +33,9 @@ public class TopBase {
     }
 
     protected boolean isPresent(By by) {
+        WebDriverWait wait = new WebDriverWait(driver, 3);
         try {
-            driver.findElement(by);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(by));
         } catch (NoSuchElementException e) {
             return false;
         }
@@ -45,10 +43,9 @@ public class TopBase {
     }
 
     protected boolean isNotPresent(By by) {
-        WebDriverWait wait = new WebDriverWait(driver, 3);
         try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(by));
-        } catch (TimeoutException e) {
+            driver.findElement(by);
+        } catch (NoSuchElementException e) {
             return true;
         }
         return false;
@@ -64,8 +61,22 @@ public class TopBase {
         return true;
     }
 
+    protected boolean isDisappeared(WebElement element) {
+        WebDriverWait wait = new WebDriverWait(driver, 3);
+        try {
+            wait.until(ExpectedConditions.invisibilityOf(element));
+        } catch (TimeoutException e) {
+            return false;
+        }
+        return true;
+    }
+
     public boolean isSignedIn() {
         return isPresent(signOutButton);
+    }
+
+    public boolean isSignedOut() {
+        return isDisappeared(accountButton);
     }
 
     public void signOut() {

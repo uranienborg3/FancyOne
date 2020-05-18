@@ -24,10 +24,10 @@ public class AccountPage extends TopBase {
         private WebDriver driver;
         private By nameField = By.id("name");
         private By saveButton = By.id("submitWishlist");
-        private By wishLists = By.cssSelector("#block-history tr");
-        private By wishListName = By.xpath("//td[1]/a");
-        private By wishlistNames = By.xpath("//tr[contains(@id, \"wishlist\")]/td[1]/a");
-        private By wishListDelete = By.xpath("//td[@class='wishlist_delete']/a");
+        private By wishListRows = By.cssSelector("#block-history tr");
+        private By wishListNameLink = By.xpath("//td[1]/a");
+        private By wishlistNames = By.xpath("//tr[contains(@id, 'wishlist')]/td[1]/a");
+        private By wishListDeleteLink = By.xpath("//td[@class='wishlist_delete']/a");
 
         public WishListSubPage(WebDriver driver) {
             this.driver = driver;
@@ -51,10 +51,10 @@ public class AccountPage extends TopBase {
         }
 
         public void deleteWishlist(String name) {
-            List<WebElement> wishlists = driver.findElements(wishLists);
+            List<WebElement> wishlists = driver.findElements(wishListRows);
             for (WebElement list : wishlists) {
-                if (list.findElement(wishListName).getText().equalsIgnoreCase("test")) {
-                    list.findElement(wishListDelete).click();
+                if (list.findElement(wishListNameLink).getText().equalsIgnoreCase(name)) {
+                    list.findElement(wishListDeleteLink).click();
                     break;
                 }
             }
@@ -62,7 +62,15 @@ public class AccountPage extends TopBase {
         }
 
         public boolean wishListDisappeared(String name) {
-            return isDisappeared(wishLists);
+            boolean x = false;
+            List<WebElement> wishlists = driver.findElements(wishlistNames);
+            for (WebElement listName : wishlists) {
+                if (listName.getText().equalsIgnoreCase(name)) {
+                    x = isDisappeared(listName);
+                    break;
+                }
+            }
+            return x;
         }
     }
 }

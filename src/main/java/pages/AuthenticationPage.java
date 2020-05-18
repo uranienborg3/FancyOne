@@ -16,12 +16,10 @@ public class AuthenticationPage extends TopBase {
     }
 
     public boolean createAccountPresent() {
-        waitFor(createAccountForm);
         return isPresent(createAccountForm);
     }
 
     public boolean logInPresent() {
-        waitFor(createAccountForm);
         return isPresent(logInFrom);
     }
 

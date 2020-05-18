@@ -3,7 +3,6 @@ package login;
 import base.BaseTests;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
 public class LoginTests extends BaseTests {
@@ -18,6 +17,6 @@ public class LoginTests extends BaseTests {
     @Test(dependsOnMethods = "testSignIn")
     public void testSignOut() {
         topbase.signOut();
-        assertFalse(topbase.isSignedIn(), "Not signed out");
+        assertTrue(topbase.isSignedOut(), "Not signed out");
     }
 }
