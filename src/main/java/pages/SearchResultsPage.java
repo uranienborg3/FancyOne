@@ -9,10 +9,9 @@ import java.util.List;
 
 public class SearchResultsPage extends TopBase {
 
-    // TODO: fields, that will not change, must be final.
-    private By productBox = By.cssSelector("ul.product_list > li");
-    private By dropDown = By.id("selectProductSort");
-    private By priceText = By.cssSelector("div.right-block .content_price span.price");
+    private final By productBox = By.cssSelector("ul.product_list > li");
+    private final By dropDown = By.id("selectProductSort");
+    private final By priceText = By.cssSelector("div.right-block .content_price span.price");
 
     public SearchResultsPage(WebDriver driver) {
         super(driver);
@@ -23,15 +22,14 @@ public class SearchResultsPage extends TopBase {
     }
 
     /**
-     * @param index 1-based
-     * @return returns a string that is the price
+     * @param index the number of a product
+     *              to get the price of;
+     *              starts with 1
+     * @return a string that is the price
      * displayed on a product
      */
     public String getPriceOf(int index) {
         WebElement product = getSearchResults().get(index - 1);
-        //TODO: please, avoid redundant code.
-//        WebDriverWait wait = new WebDriverWait(driver, 5);
-//        wait.until(ExpectedConditions.visibilityOfElementLocated(priceText));
         return product.findElement(priceText).getText();
     }
 

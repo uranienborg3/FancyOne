@@ -5,15 +5,15 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 //TODO: super class must be abstract
-public class TopBase {
+public abstract class TopBase {
 
-    // TODO: fields, that will not change, must be final.
     protected WebDriver driver;
-    private By searchField = By.id("search_query_top");
-    private By searchButton = By.cssSelector("button[name=submit_search]");
-    private By signInButton = By.className("login");
-    private By signOutButton = By.cssSelector("nav a.logout");
-    private By accountButton = By.className("account");
+    private final By searchField = By.id("search_query_top");
+    private final By searchButton = By.cssSelector("button[name=submit_search]");
+    private final By signInButton = By.className("login");
+    private final By signOutButton = By.cssSelector("nav a.logout");
+    private final By accountButton = By.className("account");
+    public static final int TIMEOUT = 5;
 
     public TopBase(WebDriver driver) {
         this.driver = driver;
@@ -34,9 +34,8 @@ public class TopBase {
         return new AuthenticationPage(driver);
     }
 
-    //TODO: nice naming =)
     protected boolean isPresent(By by) {
-        WebDriverWait wait = new WebDriverWait(driver, 3);
+        WebDriverWait wait = new WebDriverWait(driver, TIMEOUT);
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(by));
         } catch (NoSuchElementException e) {
@@ -45,22 +44,19 @@ public class TopBase {
         return true;
     }
 
-    // TODO: rename argument.
-    protected boolean isNotPresent(By by) {
+    protected boolean isNotPresent(By element) {
         try {
-            driver.findElement(by);
+            driver.findElement(element);
         } catch (NoSuchElementException e) {
             return true;
         }
         return false;
     }
 
-    // TODO: rename argument.
-    protected boolean isDisappeared(By by) {
-        //TODO: please, avoid "magic numbers". Use constants.
-        WebDriverWait wait = new WebDriverWait(driver, 3);
+    protected boolean isDisappeared(By element) {
+        WebDriverWait wait = new WebDriverWait(driver, TIMEOUT);
         try {
-            wait.until(ExpectedConditions.invisibilityOfElementLocated(by));
+            wait.until(ExpectedConditions.invisibilityOfElementLocated(element));
         } catch (TimeoutException e) {
             return false;
         }
@@ -68,8 +64,7 @@ public class TopBase {
     }
 
     protected boolean isDisappeared(WebElement element) {
-        //TODO: please, avoid "magic numbers". Use constants.
-        WebDriverWait wait = new WebDriverWait(driver, 3);
+        WebDriverWait wait = new WebDriverWait(driver, TIMEOUT);
         try {
             wait.until(ExpectedConditions.invisibilityOf(element));
         } catch (TimeoutException e) {
@@ -91,11 +86,9 @@ public class TopBase {
         driver.findElement(signOutButton).click();
     }
 
-    // TODO: rename argument.
-    protected void waitFor(By by) {
-        //TODO: please, avoid "magic numbers". Use constants.
-        WebDriverWait wait = new WebDriverWait(driver, 3);
-        wait.until(ExpectedConditions.presenceOfElementLocated(by));
+    protected void waitFor(By element) {
+        WebDriverWait wait = new WebDriverWait(driver, TIMEOUT);
+        wait.until(ExpectedConditions.presenceOfElementLocated(element));
     }
 
     public AccountPage goToMyAccount() {
