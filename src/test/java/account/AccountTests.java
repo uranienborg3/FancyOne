@@ -9,23 +9,23 @@ public class AccountTests extends BaseTests {
 
     @Test
     public void testCreateWishlist() {
-        var login = homePage.clickSignIn();
+        var login = homePage.provideNavigation().clickSignIn();
         login.logIn("9jsmith@garcia.com", "6c1Ca");
-        var account =  homePage.goToMyAccount();
+        var account =  login.provideNavigation().goToMyAccount();
         var wishlist = account.goWishLists();
         wishlist.createWishList("test");
         assertTrue(wishlist.isWishlistPresent("test"), "Wishlist not created");
-        homePage.signOut();
+        wishlist.provideNavigation().signOut();
     }
 
     @Test(dependsOnMethods = "testCreateWishlist")
     public void testDeleteWishlist() {
-        var login = homePage.clickSignIn();
+        var login = homePage.provideNavigation().clickSignIn();
         login.logIn("9jsmith@garcia.com", "6c1Ca");
-        var account =  homePage.goToMyAccount();
+        var account =  login.provideNavigation().goToMyAccount();
         var wishlist = account.goWishLists();
         wishlist.deleteWishlist("test");
         assertTrue(wishlist.hasWishListDisappeared("test"), "Wishlist not deleted");
-        homePage.signOut();
+        wishlist.provideNavigation().signOut();
     }
 }

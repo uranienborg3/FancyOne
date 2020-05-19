@@ -13,7 +13,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
-public class HomePage extends TopNavigation implements Navigable {
+public class HomePage extends AccountPage implements Navigable {
 
     private final TopNavigation navigation;
 
@@ -86,7 +86,6 @@ public class HomePage extends TopNavigation implements Navigable {
      *              starts with 1
      */
     private WebElement getProductElement(int index) {
-        //TODO: please, avoid "magic numbers". Use constants.
         return getProductList().get(index - 1);
     }
 

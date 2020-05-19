@@ -28,9 +28,9 @@ public class TopNavigation extends AbstractElement {
     }
 
     //TODO: remove later
-    public HomePage switchToHomePage() {
-        return new HomePage(driver);
-    }
+//    public HomePage switchToHomePage() {
+//        return new HomePage(driver);
+//    }
 
     public boolean isSignedIn() {
         return isPresent(signOutButton);

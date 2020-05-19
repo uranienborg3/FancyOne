@@ -10,7 +10,7 @@ public class SearchTests extends BaseTests {
 
     @Test
     public void testSortSearchResults() {
-        var search = homePage.searchFor("dress");
+        var search = homePage.provideNavigation().searchFor("dress");
         assertEquals(search.getPriceOf(1), "$28.98", "Price is not correct");
         search.sortSearchResults("Price: Lowest first");
         assertEquals(search.getPriceOf(1), "$16.51", "Not sorted");

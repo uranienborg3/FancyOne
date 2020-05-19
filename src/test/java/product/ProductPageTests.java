@@ -8,7 +8,7 @@ import static org.testng.Assert.assertTrue;
 public class ProductPageTests extends BaseTests {
     @Test
     public void testViewPictureInLarge() {
-        var product = homePage.switchToHomePage().viewProductDetails(3);
+        var product = homePage.viewProductDetails(3);
         assertTrue(product.isMainPictureDisplayed(), "Big pic is not there: probably not a product detail page");
         product.openMainPicture();
         product.clickNextPicture(4);

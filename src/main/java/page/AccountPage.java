@@ -21,7 +21,7 @@ public class AccountPage extends AbstractElement implements Navigable {
 
     public WishListSubPage goWishLists() {
         driver.findElement(wishListButton).click();
-        return new WishListSubPage();
+        return new WishListSubPage(driver);
     }
 
     @Override
@@ -29,14 +29,26 @@ public class AccountPage extends AbstractElement implements Navigable {
         return navigation;
     }
 
-    public class WishListSubPage {
+    public class WishListSubPage extends AbstractElement implements Navigable {
 
+        private final TopNavigation navigation;
         private final By nameField = By.id("name");
         private final By saveButton = By.id("submitWishlist");
         private final By wishListRows = By.cssSelector("#block-history tr");
         private final By wishListNameLink = By.xpath("//td[1]/a");
         private final By wishListNames = By.xpath("//tr[contains(@id, 'wishlist')]/td[1]/a");
         private final By wishListDeleteLink = By.xpath("//td[@class='wishlist_delete']/a");
+
+        public WishListSubPage(WebDriver driver) {
+            super(driver);
+            navigation = new TopNavigation(driver);
+        }
+
+        @Override
+        public TopNavigation provideNavigation() {
+            return navigation;
+        }
+
 
         public void createWishList(String name) {
             driver.findElement(nameField).sendKeys(name);

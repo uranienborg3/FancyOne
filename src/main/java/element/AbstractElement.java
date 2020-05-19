@@ -12,10 +12,10 @@ abstract public class AbstractElement {
     public AbstractElement(WebDriver driver) {
         this.driver = driver;
     }
-    protected boolean isPresent(By by) {
+    protected boolean isPresent(By element) {
         WebDriverWait wait = new WebDriverWait(driver, TIMEOUT);
         try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(by));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(element));
         } catch (NoSuchElementException e) {
             return false;
         }
