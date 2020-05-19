@@ -4,7 +4,6 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-//TODO: super class must be abstract
 public abstract class TopBase {
 
     protected WebDriver driver;
