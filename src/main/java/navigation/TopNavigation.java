@@ -2,11 +2,8 @@ package navigation;
 
 import element.AbstractElement;
 import org.openqa.selenium.*;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import page.AccountPage;
+import page.account.AccountPage;
 import page.AuthenticationPage;
-import page.HomePage;
 import page.SearchResultsPage;
 
 public class TopNavigation extends AbstractElement {

@@ -12,7 +12,7 @@ public class AccountTests extends BaseTests {
         var login = homePage.provideNavigation().clickSignIn();
         login.logIn("9jsmith@garcia.com", "6c1Ca");
         var account =  login.provideNavigation().goToMyAccount();
-        var wishlist = account.goWishLists();
+        var wishlist = account.goToWishLists();
         wishlist.createWishList("test");
         assertTrue(wishlist.isWishlistPresent("test"), "Wishlist not created");
         wishlist.provideNavigation().signOut();
@@ -23,7 +23,7 @@ public class AccountTests extends BaseTests {
         var login = homePage.provideNavigation().clickSignIn();
         login.logIn("9jsmith@garcia.com", "6c1Ca");
         var account =  login.provideNavigation().goToMyAccount();
-        var wishlist = account.goWishLists();
+        var wishlist = account.goToWishLists();
         wishlist.deleteWishlist("test");
         assertTrue(wishlist.hasWishListDisappeared("test"), "Wishlist not deleted");
         wishlist.provideNavigation().signOut();
