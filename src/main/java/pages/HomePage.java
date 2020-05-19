@@ -11,22 +11,22 @@ import java.util.List;
 
 public class HomePage extends TopBase {
 
-    // TODO: fields, that will not change, must be final.
-    private By productBox = By.cssSelector("ul.active li");
-    private By moreButton = By.cssSelector("a.button.lnk_view");
-    private By addToCartButton = By.cssSelector("a.ajax_add_to_cart_button");
-    private By quickViewButton = By.className("quick-view");
-    private By iFrame = By.className("fancybox-iframe");
-    private By bestSellersTab = By.className("blockbestsellers");
+    private final By productBox = By.cssSelector("ul.active li");
+    private final By moreButton = By.cssSelector("a.button.lnk_view");
+    private final By addToCartButton = By.cssSelector("a.ajax_add_to_cart_button");
+    private final By quickViewButton = By.className("quick-view");
+    private final By iFrame = By.className("fancybox-iframe");
+    private final By bestSellersTab = By.className("blockbestsellers");
 
     public HomePage(WebDriver driver) {
         super(driver);
     }
 
     /**
-     * @param index 1-based
+     * @param index the number of a product on the page
+     *              to view details of;
+     *              starts with 1
      */
-    //TODO: please, write more meaningful javadoc.
     public ProductPage viewProductDetails(int index) {
         WebElement product = getProductElement(index);
         Actions action = new Actions(driver);
@@ -37,24 +37,25 @@ public class HomePage extends TopBase {
 
 
     /**
-     * @param index 1-based
+     * @param index the number of a product on the page
+     *              to quick view;
+     *              starts with 1
      */
-    //TODO: please, write more meaningful javadoc.
     public QuickViewFrame quickViewProduct(int index) {
         WebElement product = getProductElement(index);
         showButtons(product);
         product.findElement(quickViewButton).click();
-        //TODO: please, avoid "magic numbers". Use constants.
-        WebDriverWait wait = new WebDriverWait(driver, 3);
+        WebDriverWait wait = new WebDriverWait(driver, TIMEOUT);
         wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(iFrame));
         return new QuickViewFrame(driver);
     }
 
 
     /**
-     * @param index 1-based
+     * @param index the number of a product on the page
+     *              to add to the cart;
+     *              starts with 1
      */
-    //TODO: please, write more meaningful javadoc.
     public CartModal addProductToCart(int index) {
         WebElement product = getProductElement(index);
         showButtons(product);
@@ -69,14 +70,10 @@ public class HomePage extends TopBase {
 
 
     /**
-     * @param index 1-based
+     * @param index the number of a product on the page
+     *              starts with 1
      */
-    //TODO: please, write more meaningful javadoc.
     private WebElement getProductElement(int index) {
-        //TODO: please, avoid redundant code.
-//        WebDriverWait wait = new WebDriverWait(driver, 5);
-//        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(productBox));
-//        List<WebElement> allProductsList = driver.findElements(productBox);
         //TODO: please, avoid "magic numbers". Use constants.
         return getProductList().get(index - 1);
     }
@@ -85,7 +82,7 @@ public class HomePage extends TopBase {
         return driver.findElements(productBox);
     }
 
-    public void changeToBestSellersTab() {
+    public void switchToBestSellersTab() {
         driver.findElement(bestSellersTab).click();
     }
 }
