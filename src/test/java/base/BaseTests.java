@@ -5,12 +5,12 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
-import pages.TopBase;
+import pages.HomePage;
 
 public class BaseTests {
 
     private WebDriver driver;
-    public TopBase topbase;
+    public HomePage homePage;
 
     @BeforeClass
     public void setUp() {
@@ -23,7 +23,7 @@ public class BaseTests {
     @BeforeMethod
     public void goHome() {
         driver.get("http://automationpractice.com/index.php");
-        topbase = new TopBase(driver);
+        homePage = new HomePage(driver);
     }
 
     @AfterClass

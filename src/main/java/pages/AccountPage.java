@@ -8,8 +8,7 @@ import java.util.List;
 
 public class AccountPage extends TopBase {
 
-    // TODO: fields, that will not change, must be final.
-    private By wishListButton = By.cssSelector(".lnk_wishlist a");
+    private final By wishListButton = By.cssSelector(".lnk_wishlist a");
 
     public AccountPage(WebDriver driver) {
         super(driver);
@@ -27,7 +26,7 @@ public class AccountPage extends TopBase {
         private final By saveButton = By.id("submitWishlist");
         private final By wishListRows = By.cssSelector("#block-history tr");
         private final By wishListNameLink = By.xpath("//td[1]/a");
-        private final By wishlistNames = By.xpath("//tr[contains(@id, 'wishlist')]/td[1]/a");
+        private final By wishListNames = By.xpath("//tr[contains(@id, 'wishlist')]/td[1]/a");
         private final By wishListDeleteLink = By.xpath("//td[@class='wishlist_delete']/a");
 
         public WishListSubPage(WebDriver driver) {
@@ -39,24 +38,8 @@ public class AccountPage extends TopBase {
             driver.findElement(saveButton).click();
         }
 
-        public boolean wishlistPresent(String name) {
-            List<WebElement> links = driver.findElements(wishlistNames);
-            // TODO: rename variable (https://docs.oracle.com/javase/tutorial/java/nutsandbolts/variables.html)
-            /* for example, "x" could be renamed to "isLinkTheSame" ot something like that */
-            boolean x = false;
-            for (WebElement link : links) {
-                if (link.getText().equalsIgnoreCase(name)) {
-                    x = true;
-                    break;
-                }
-            }
-            return x;
-        }
-
-        // TODO: variables and methods, which returns boolean, must started with "is".
         public boolean isWishlistPresent(String name) {
-            // TODO: https://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html
-            return driver.findElements(wishlistNames)
+            return driver.findElements(wishListNames)
                     .stream()
                     .anyMatch(link -> link.getText().equalsIgnoreCase(name));
         }
@@ -72,16 +55,16 @@ public class AccountPage extends TopBase {
             driver.switchTo().alert().accept();
         }
 
-        public boolean wishListDisappeared(String name) {
-            boolean x = false;
-            List<WebElement> wishLists = driver.findElements(wishlistNames);
+        public boolean hasWishListDisappeared(String name) {
+            boolean wishListExists = false;
+            List<WebElement> wishLists = driver.findElements(wishListNames);
             for (WebElement listName : wishLists) {
                 if (listName.getText().equalsIgnoreCase(name)) {
-                    x = isDisappeared(listName);
+                    wishListExists = isDisappeared(listName);
                     break;
                 }
             }
-            return x;
+            return wishListExists;
         }
     }
 }

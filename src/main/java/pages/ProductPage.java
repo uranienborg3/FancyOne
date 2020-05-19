@@ -8,40 +8,42 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class ProductPage extends TopBase {
 
-    // TODO: fields, that will not change, must be final.
-    // TODO: rename variable (https://docs.oracle.com/javase/tutorial/java/nutsandbolts/variables.html)
-    private By bigpic = By.id("bigpic");
-    private By bigPicEnlarged = By.cssSelector("div.fancybox-opened");
-    private By nextPicLink = By.cssSelector("div.fancybox-opened a.fancybox-next");
-    private By closeBigPic = By.cssSelector("a.fancybox-close");
+    private final By mainPicture = By.id("bigpic");
+    private final By mainPictureOpened = By.cssSelector("div.fancybox-opened");
+    private final By nextPictureLink = By.cssSelector("div.fancybox-opened a.fancybox-next");
+    private final By closeMainPictureButton = By.cssSelector("a.fancybox-close");
 
     ProductPage(WebDriver driver) {
         super(driver);
     }
 
-    public boolean bigPicIsDisplayed() {
-        return isPresent(bigpic);
+    public boolean isMainPictureDisplayed() {
+        return isPresent(mainPicture);
     }
 
-    public void clickBigPic() {
-        driver.findElement(bigpic).click();
+    public void openMainPicture() {
+        driver.findElement(mainPicture).click();
     }
 
-    public void closeBigPic() {
-        WebDriverWait wait = new WebDriverWait(driver, 3);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(closeBigPic));
-        driver.findElement(closeBigPic).click();
+    public void closeMainPicture() {
+        WebDriverWait wait = new WebDriverWait(driver, TIMEOUT);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(closeMainPictureButton));
+        driver.findElement(closeMainPictureButton).click();
     }
 
-    public boolean bigPicIsClosed() {
-        return isNotPresent(bigPicEnlarged);
+    public boolean isMainPictureClosed() {
+        return isNotPresent(mainPictureOpened);
     }
 
-    public void clickNextBigPic(int times) {
-        WebDriverWait wait = new WebDriverWait(driver, 3);
+    /**
+     * @param times the number of times to
+     *              click "next picture"
+     */
+    public void clickNextPicture(int times) {
+        WebDriverWait wait = new WebDriverWait(driver, TIMEOUT);
         for (int i = 0; i < times; i++) {
-            wait.until(ExpectedConditions.presenceOfElementLocated(bigPicEnlarged));
-            driver.findElement(nextPicLink).click();
+            wait.until(ExpectedConditions.presenceOfElementLocated(mainPictureOpened));
+            driver.findElement(nextPictureLink).click();
         }
     }
 }
