@@ -1,5 +1,6 @@
 package page;
 
+import element.AbstractElement;
 import element.CartModal;
 import element.QuickViewFrame;
 import navigation.Navigable;
@@ -10,14 +11,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import page.account.AccountPage;
 
 import java.util.List;
 
-public class HomePage extends AccountPage implements Navigable {
+public class HomePage extends AbstractElement implements Navigable {
 
     private final TopNavigation navigation;
-
     private final By productBox = By.cssSelector("ul.active li");
     private final By moreButton = By.cssSelector("a.button.lnk_view");
     private final By addToCartButton = By.cssSelector("a.ajax_add_to_cart_button");

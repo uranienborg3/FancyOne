@@ -1,10 +1,11 @@
 package navigation;
 
 import element.AbstractElement;
-import org.openqa.selenium.*;
-import page.account.AccountPage;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import page.AuthenticationPage;
 import page.SearchResultsPage;
+import page.account.AccountPage;
 
 public class TopNavigation extends AbstractElement {
 
@@ -23,11 +24,6 @@ public class TopNavigation extends AbstractElement {
         driver.findElement(searchButton).click();
         return new SearchResultsPage(driver);
     }
-
-    //TODO: remove later
-//    public HomePage switchToHomePage() {
-//        return new HomePage(driver);
-//    }
 
     public boolean isSignedIn() {
         return isPresent(signOutButton);
